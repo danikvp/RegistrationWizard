@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RegistrationWizard.Domain;
+using RegistrationWizard.Application;
 using RegistrationWizard.Domain.Entities;
 
 namespace RegistrationWizard.Infrastructure
@@ -18,11 +18,8 @@ namespace RegistrationWizard.Infrastructure
 
         public DbSet<Country> Country => Set<Country>();
         public DbSet<Province> Province => Set<Province>();
+        public DbSet<RegistrationData> RegistrationData => Set<RegistrationData>();
 
-
-
-        IQueryable<Country> IDbContext.Country => Country;
-        IQueryable<Province> IDbContext.Province => Province;
     }
 
 }

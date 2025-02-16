@@ -68,6 +68,39 @@ namespace RegistrationWizard.Infrastructure.Migrations
                     b.ToTable("Province");
                 });
 
+            modelBuilder.Entity("RegistrationWizard.Domain.Entities.RegistrationData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Login")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<int>("ProvinceId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CountryId");
+
+                    b.HasIndex("ProvinceId");
+
+                    b.ToTable("RegistrationData");
+                });
+
             modelBuilder.Entity("RegistrationWizard.Domain.Entities.Province", b =>
                 {
                     b.HasOne("RegistrationWizard.Domain.Entities.Country", "Country")
@@ -77,6 +110,25 @@ namespace RegistrationWizard.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Country");
+                });
+
+            modelBuilder.Entity("RegistrationWizard.Domain.Entities.RegistrationData", b =>
+                {
+                    b.HasOne("RegistrationWizard.Domain.Entities.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RegistrationWizard.Domain.Entities.Province", "Province")
+                        .WithMany()
+                        .HasForeignKey("ProvinceId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Country");
+
+                    b.Navigation("Province");
                 });
 #pragma warning restore 612, 618
         }

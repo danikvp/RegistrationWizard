@@ -1,8 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using RegistrationWizard.Application;
-using RegistrationWizard.Domain;
+using RegistrationWizard.Application.Models;
+using RegistrationWizard.Application.Models.Validation;
 using RegistrationWizard.Infrastructure;
 using RegistrationWizard.Server.Extensions;
+using RegistrationWizard.Server.Filters;
 
 namespace RegistrationWizard.Server
 {
@@ -18,9 +22,13 @@ namespace RegistrationWizard.Server
             builder.Services.AddScoped<IDbContext, RegistrationWizardServerContext>();
             builder.Services.AddScoped<IApplicationFacade, ApplicationFacade>();
 
-            // Add services to the container.
+            builder.Services.AddValidatorsFromAssembly(typeof(RegistrationCommandValidator).Assembly);
 
-            builder.Services.AddControllers();
+            // Add services to the container.
+            builder.Services.AddControllers(c =>
+            {
+                c.Filters.Add(new ValidationFilter<RegisterCommand>());
+            });
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

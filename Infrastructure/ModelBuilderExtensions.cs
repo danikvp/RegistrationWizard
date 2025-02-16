@@ -20,6 +20,14 @@ namespace RegistrationWizard.Infrastructure
             provinceName.Property(pn => pn.Name).HasMaxLength(64).IsRequired();
             provinceName.HasIndex(pn=>pn.Name).IsUnique(true);
 
+
+            var registrationData = modelBuilder.Entity<RegistrationData>();
+            registrationData.Property(rd => rd.Login).HasMaxLength(64).IsRequired();
+            registrationData.Property(rd => rd.Password).HasMaxLength(64).IsRequired();
+
+            registrationData.HasOne(rd=>rd.Province).WithMany().OnDelete(DeleteBehavior.NoAction);
+
+
         }
     }
 }

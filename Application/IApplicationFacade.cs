@@ -1,10 +1,13 @@
-﻿using RegistrationWizard.Domain.Entities;
+﻿using RegistrationWizard.Application.Models;
+using RegistrationWizard.Domain.Entities;
 
 namespace RegistrationWizard.Application
 {
     public interface IApplicationFacade
     {
-        IQueryable<Country> GetCountry();
-        IQueryable<Province> GetProvince(int? countryId);
+        Task<List<Country>> GetCountry();
+        Task <List<Province>> GetProvince(int? countryId);
+
+        Task<int> Register(RegisterCommand registerCommand);
     }
 }

@@ -22,14 +22,14 @@ namespace RegistrationWizard.Server.Controllers
         [HttpGet("countries")]
         public async Task<ActionResult<IEnumerable<Country>>> GetCountry()
         {
-            return await _applicationFacade.GetCountry().ToListAsync();
+            return await _applicationFacade.GetCountry();
         }
 
         // GET: api/Dictionaries/Provinces
         [HttpGet("provinces")]
         public async Task<ActionResult<IEnumerable<Province>>> GetProvince([FromQuery] ProvinceQueryParams queryParams)
         {
-            return await _applicationFacade.GetProvince(queryParams.CountryId).ToListAsync();
+            return await _applicationFacade.GetProvince(queryParams.CountryId);
         }
     }
 }

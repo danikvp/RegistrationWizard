@@ -1,4 +1,6 @@
-﻿using RegistrationWizard.Domain;
+﻿using Microsoft.EntityFrameworkCore;
+using RegistrationWizard.Application.Models;
+using RegistrationWizard.Domain;
 using RegistrationWizard.Domain.Entities;
 
 namespace RegistrationWizard.Application
@@ -12,13 +14,29 @@ namespace RegistrationWizard.Application
             this.dbContext = dbContext;
         }
 
-        public IQueryable<Country> GetCountry()
+        public async Task<List<Country>> GetCountry()
         {
-            return dbContext.Country;
+            return await dbContext.Country.ToListAsync();
         }
-        public IQueryable<Province> GetProvince(int? countryId)
+        public async Task<List<Province>> GetProvince(int? countryId)
         {
-            return dbContext.Province.Where(p => countryId == null || p.Country.Id == countryId);
+            return await dbContext.Province.Where(p => countryId == null || p.Country.Id == countryId).ToListAsync();
+        }
+
+        public async Task<int> Register(RegisterCommand registerCommand)
+        {
+            RegistrationData regData = new RegistrationData()
+            {
+                Login = registerCommand.Login,
+                Password = registerCommand.Password,
+                Country = dbContext.Country.First(c => c.Id == registerCommand.CountryId),
+                Province = dbContext.Province.First(p => p.Id == registerCommand.ProvinceId)
+
+            };
+
+
+            dbContext.RegistrationData.Add(regData);
+            return await dbContext.SaveChangesAsync();
         }
     }
 }
