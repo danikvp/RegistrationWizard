@@ -51,7 +51,7 @@ export class DataService {
 
         if (ajaxError) {
           if (ajaxError.status == 500)
-            this.errorHandlingService.processError("Internal server error. Please try refreshing once the ASP.NET backend has started.");
+            this.errorHandlingService.processError("Internal server error.");
           else
             this.errorHandlingService.processError(ajaxError.response || ajaxError.message || ajaxError);
         }

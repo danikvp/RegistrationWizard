@@ -78,6 +78,7 @@ export class RegistrationWizardComponent implements OnInit, OnDestroy {
   constructor(private _dataService: DataService) { }
 
   ngOnInit() {
+
     this.loadCountries();
 
     this.countryControl.valueChanges
@@ -106,11 +107,15 @@ export class RegistrationWizardComponent implements OnInit, OnDestroy {
     if (!this.secondFormGroup.valid) return;
 
     this.loading = true;
-    const { country, province } = this.secondFormGroup.value
+    const { country, province } = this.secondFormGroup.value;
+    const { login, password } = this.firstFormGroup.getRawValue();
 
-    const registrationInfo: RegistrationInfo = <RegistrationInfo>{ ...this.firstFormGroup.value, countryId: country!.id, provinceId: province!.id };
+    const registrationInfo: RegistrationInfo = {
+      login, password, countryId: country!.id, provinceId: province!.id
+    };
 
     this._dataService.register(registrationInfo).pipe(
+      takeUntil(this.destroy$),
       finalize(() => {
         this.loading = false;
       })
@@ -121,9 +126,12 @@ export class RegistrationWizardComponent implements OnInit, OnDestroy {
 
 
   private loadCountries() {
-    this._dataService.getCountryList().subscribe(countries => {
-      this.countries = countries;
-    });
+    this._dataService.getCountryList()
+      .pipe(
+        takeUntil(this.destroy$),
+      ).subscribe(countries => {
+        this.countries = countries;
+      });
   }
 
 
