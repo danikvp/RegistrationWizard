@@ -1,0 +1,37 @@
+.reg-form {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+
+  .mat-mdc-form-field {
+    padding-bottom: 0.5em;
+  }
+
+  .buttons {
+    width: 100%;
+    text-align: right;
+  }
+
+  .confirmation {
+    height: 70px;
+    text-align: left;
+
+    .mat-mdc-form-field-error {
+      padding-left: 0.5em;
+    }
+  }
+}
+
+
+.spinner-container {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.32);
+  z-index: 2000;
+}

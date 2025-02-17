@@ -1,10 +1,6 @@
-﻿
-using System.ComponentModel.DataAnnotations;
-using FluentValidation;
-using Microsoft.AspNetCore.Http.HttpResults;
+﻿using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Model;
 
 namespace RegistrationWizard.Server.Filters
 {

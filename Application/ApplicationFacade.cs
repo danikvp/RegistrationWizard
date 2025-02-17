@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RegistrationWizard.Application.Models;
-using RegistrationWizard.Domain;
 using RegistrationWizard.Domain.Entities;
 
 namespace RegistrationWizard.Application
@@ -8,10 +7,12 @@ namespace RegistrationWizard.Application
     public class ApplicationFacade : IApplicationFacade
     {
         private readonly IDbContext dbContext;
+        private readonly IPasswordHasher passwordHasher;
 
-        public ApplicationFacade(IDbContext dbContext)
+        public ApplicationFacade(IDbContext dbContext, IPasswordHasher passwordHasher)
         {
             this.dbContext = dbContext;
+            this.passwordHasher = passwordHasher;
         }
 
         public async Task<List<Country>> GetCountry()
@@ -28,7 +29,7 @@ namespace RegistrationWizard.Application
             RegistrationData regData = new RegistrationData()
             {
                 Login = registerCommand.Login,
-                Password = registerCommand.Password,
+                Password = passwordHasher.HashPassword(registerCommand.Password),
                 Country = dbContext.Country.First(c => c.Id == registerCommand.CountryId),
                 Province = dbContext.Province.First(p => p.Id == registerCommand.ProvinceId)
 

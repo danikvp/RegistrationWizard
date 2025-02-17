@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RegistrationWizard.Domain.Entities
+﻿namespace RegistrationWizard.Domain.Entities
 {
     public class RegistrationData
     {

@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using RegistrationWizard.Application;
 using RegistrationWizard.Application.Models;
@@ -19,6 +18,7 @@ namespace RegistrationWizard.Server
                 options.UseSqlServer(builder.Configuration.GetConnectionString("RegistrationWizardServerContext") ?? throw new InvalidOperationException("Connection string 'RegistrationWizardServerContext' not found.")));
 
 
+            builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
             builder.Services.AddScoped<IDbContext, RegistrationWizardServerContext>();
             builder.Services.AddScoped<IApplicationFacade, ApplicationFacade>();
 

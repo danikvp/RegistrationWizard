@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using RegistrationWizard.Application;
 using RegistrationWizard.Domain.Entities;
 using RegistrationWizard.Server.Models;
