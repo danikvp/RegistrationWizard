@@ -39,8 +39,7 @@ namespace RegistrationWizard.Infrastructure.Migrations
                         name: "FK_Province_Country_CountryId",
                         column: x => x.CountryId,
                         principalTable: "Country",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -61,8 +60,7 @@ namespace RegistrationWizard.Infrastructure.Migrations
                         name: "FK_RegistrationData_Country_CountryId",
                         column: x => x.CountryId,
                         principalTable: "Country",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_RegistrationData_Province_ProvinceId",
                         column: x => x.ProvinceId,

@@ -11,7 +11,7 @@ using RegistrationWizard.Infrastructure;
 namespace RegistrationWizard.Infrastructure.Migrations
 {
     [DbContext(typeof(RegistrationWizardServerContext))]
-    [Migration("20250214171638_Initial")]
+    [Migration("20250217150720_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -109,7 +109,7 @@ namespace RegistrationWizard.Infrastructure.Migrations
                     b.HasOne("RegistrationWizard.Domain.Entities.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Country");
@@ -120,7 +120,7 @@ namespace RegistrationWizard.Infrastructure.Migrations
                     b.HasOne("RegistrationWizard.Domain.Entities.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("RegistrationWizard.Domain.Entities.Province", "Province")

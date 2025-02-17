@@ -106,7 +106,7 @@ namespace RegistrationWizard.Infrastructure.Migrations
                     b.HasOne("RegistrationWizard.Domain.Entities.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Country");
@@ -117,7 +117,7 @@ namespace RegistrationWizard.Infrastructure.Migrations
                     b.HasOne("RegistrationWizard.Domain.Entities.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("RegistrationWizard.Domain.Entities.Province", "Province")

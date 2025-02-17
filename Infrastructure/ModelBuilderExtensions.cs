@@ -7,13 +7,14 @@ namespace RegistrationWizard.Infrastructure
     {
         public static void customizeModel(this ModelBuilder modelBuilder) {
 
-            var countryName = modelBuilder.Entity<Country>();
-            countryName.Property(cn => cn.Name).HasMaxLength(64).IsRequired();
-            countryName.HasIndex(cn => cn.Name).IsUnique();
+            var country = modelBuilder.Entity<Country>();
+            country.Property(c => c.Name).HasMaxLength(64).IsRequired();
+            country.HasIndex(c => c.Name).IsUnique();
 
-            var provinceName = modelBuilder.Entity<Province>();
-            provinceName.Property(pn => pn.Name).HasMaxLength(64).IsRequired();
-            provinceName.HasIndex(pn=>pn.Name).IsUnique(true);
+            var province = modelBuilder.Entity<Province>();
+            province.Property(p => p.Name).HasMaxLength(64).IsRequired();
+            province.HasIndex(p=>p.Name).IsUnique(true);
+            province.HasOne(p=>p.Country).WithMany().OnDelete(DeleteBehavior.NoAction);
 
 
             var registrationData = modelBuilder.Entity<RegistrationData>();
@@ -21,6 +22,7 @@ namespace RegistrationWizard.Infrastructure
             registrationData.Property(rd => rd.Password).HasMaxLength(64).IsRequired();
 
             registrationData.HasOne(rd=>rd.Province).WithMany().OnDelete(DeleteBehavior.NoAction);
+            registrationData.HasOne(rd => rd.Country).WithMany().OnDelete(DeleteBehavior.NoAction);
 
 
         }
