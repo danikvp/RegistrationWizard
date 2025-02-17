@@ -19,7 +19,7 @@ namespace RegistrationWizard.Infrastructure
 
             var registrationData = modelBuilder.Entity<RegistrationData>();
             registrationData.Property(rd => rd.Login).HasMaxLength(64).IsRequired();
-            registrationData.Property(rd => rd.Password).HasMaxLength(64).IsRequired();
+            registrationData.Property(rd => rd.PasswordHash).HasMaxLength(64).IsRequired();
 
             registrationData.HasOne(rd=>rd.Province).WithMany().OnDelete(DeleteBehavior.NoAction);
             registrationData.HasOne(rd => rd.Country).WithMany().OnDelete(DeleteBehavior.NoAction);

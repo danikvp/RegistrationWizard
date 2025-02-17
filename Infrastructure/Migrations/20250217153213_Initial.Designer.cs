@@ -11,7 +11,7 @@ using RegistrationWizard.Infrastructure;
 namespace RegistrationWizard.Infrastructure.Migrations
 {
     [DbContext(typeof(RegistrationWizardServerContext))]
-    [Migration("20250217150720_Initial")]
+    [Migration("20250217153213_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -87,7 +87,7 @@ namespace RegistrationWizard.Infrastructure.Migrations
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");

@@ -29,7 +29,7 @@ namespace RegistrationWizard.Application
             RegistrationData regData = new RegistrationData()
             {
                 Login = registerCommand.Login,
-                Password = passwordHasher.HashPassword(registerCommand.Password),
+                PasswordHash = passwordHasher.HashPassword(registerCommand.Password),
                 Country = dbContext.Country.First(c => c.Id == registerCommand.CountryId),
                 Province = dbContext.Province.First(p => p.Id == registerCommand.ProvinceId)
 
