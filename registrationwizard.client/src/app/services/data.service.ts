@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { Country } from '../models/country';
 import { Province } from '../models/province';
 import { RegistrationInfo } from '../models/registration-info';
@@ -58,7 +58,7 @@ export class DataService {
         else
           this.errorHandlingService.processError(error);
 
-        throw error;
+        return throwError(() => error);
       })
     );
   }
